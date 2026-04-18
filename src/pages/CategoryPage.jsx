@@ -25,7 +25,7 @@ const CategoryPage = ({ searchTerm }) => {
       </div>
       
       {/* Dynamic Product Grid */}
-      <ProductGrid selectedCategory={categoryId} searchTerm={searchTerm} isCategoryRoute={true} />
+      <ProductGrid categoryName={categoryId} searchTerm={searchTerm} isCategoryRoute={true} />
       
       {/* Spacer for scrolling */}
       <div className="h-20"></div>

@@ -6,6 +6,8 @@ import { useAuth } from '../context/AuthContext';
 
 import { Link } from 'react-router-dom';
 
+const searchSuggestions = ['Search "milk"', 'Search "atta"', 'Search "bread"', 'Search "atta"', 'Search "eggs"', 'Search "apple"'];
+
 const Header = ({ searchTerm, setSearchTerm }) => {
   const { setIsCartOpen, totalItems, grandTotal } = useCart();
   const { locationName, setLocationName, city, setCity, deliveryTime, setDeliveryTime } = useLocation();
@@ -13,6 +15,25 @@ const Header = ({ searchTerm, setSearchTerm }) => {
   
   const [isLocationMenuOpen, setIsLocationMenuOpen] = useState(false);
   const menuRef = useRef(null);
+
+  // Animated Search Placeholder State
+  const [suggestionIndex, setSuggestionIndex] = useState(0);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
+  useEffect(() => {
+    if (isInputFocused || searchTerm) return;
+
+    const interval = setInterval(() => {
+      setIsFadingOut(true);
+      setTimeout(() => {
+        setSuggestionIndex((prev) => (prev + 1) % searchSuggestions.length);
+        setIsFadingOut(false);
+      }, 300); // 300ms fade out duration
+    }, 2000); // Wait 2 seconds before changing
+
+    return () => clearInterval(interval);
+  }, [isInputFocused, searchTerm]);
 
   const demoLocations = [
     { name: 'Boring Road, Patna', city: 'Patna', time: 8 },
@@ -102,9 +123,17 @@ const Header = ({ searchTerm, setSearchTerm }) => {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="block w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-2xl leading-5 bg-white/90 backdrop-blur-md placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-1 focus:ring-gray-300 focus:border-gray-300 text-base transition-all duration-300 shadow-sm hover:shadow-md"
-                placeholder="Search 'chips, milk, etc'"
+                onFocus={() => setIsInputFocused(true)}
+                onBlur={() => setIsInputFocused(false)}
+                className="block w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-2xl leading-5 bg-white/90 backdrop-blur-md focus:outline-none focus:bg-white focus:ring-1 focus:ring-gray-300 focus:border-gray-300 text-base transition-all duration-300 shadow-sm hover:shadow-md"
               />
+              {!searchTerm && !isInputFocused && (
+                <div className="absolute inset-y-0 left-12 flex items-center pointer-events-none overflow-hidden">
+                  <span className={`text-gray-400 text-base transition-all duration-300 ${isFadingOut ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0'}`}>
+                    {searchSuggestions[suggestionIndex]}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
           
@@ -223,9 +252,17 @@ const Header = ({ searchTerm, setSearchTerm }) => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="block w-full pl-10 pr-3 py-3.5 border border-gray-200 rounded-xl leading-5 bg-white/90 backdrop-blur-md placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-1 focus:ring-gray-300 focus:border-gray-300 text-sm transition-all duration-300 shadow-sm"
-              placeholder="Search 'chips, milk, etc'"
+              onFocus={() => setIsInputFocused(true)}
+              onBlur={() => setIsInputFocused(false)}
+              className="block w-full pl-10 pr-3 py-3.5 border border-gray-200 rounded-xl leading-5 bg-white/90 backdrop-blur-md focus:outline-none focus:bg-white focus:ring-1 focus:ring-gray-300 focus:border-gray-300 text-sm transition-all duration-300 shadow-sm"
             />
+            {!searchTerm && !isInputFocused && (
+              <div className="absolute inset-y-0 left-10 flex items-center pointer-events-none overflow-hidden">
+                <span className={`text-gray-400 text-sm transition-all duration-600 ${isFadingOut ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0'}`}>
+                  {searchSuggestions[suggestionIndex]}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 

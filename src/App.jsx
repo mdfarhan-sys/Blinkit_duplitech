@@ -5,6 +5,8 @@ import CartDrawer from './components/CartDrawer'
 import DeliveryWidget from './components/DeliveryWidget'
 import Footer from './components/Footer'
 import LoginModal from './components/LoginModal'
+import TechnicalNoticeModal from './components/TechnicalNoticeModal'
+import LiveSystemStatus from './components/LiveSystemStatus'
 import { CartProvider } from './context/CartContext'
 import { LocationProvider } from './context/LocationContext'
 import { AuthProvider } from './context/AuthContext'
@@ -23,6 +25,8 @@ function App() {
       <CartProvider>
         <div className="min-h-screen bg-[#F5F7F9] font-sans pb-20 md:pb-0">
           <Toaster position="bottom-center" toastOptions={{ duration: 2000 }} />
+          <TechnicalNoticeModal />
+          <LiveSystemStatus />
           <LoginModal />
           <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <DeliveryWidget />

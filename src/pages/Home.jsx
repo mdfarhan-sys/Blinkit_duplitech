@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PromoBanners from '../components/PromoBanners';
 import CategoryRoundels from '../components/CategoryRoundels';
 import ProductGrid from '../components/ProductGrid';
-import StickyCategoryBar from '../components/StickyCategoryBar';
 
 const Home = ({ searchTerm }) => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
   return (
     <main className="max-w-7xl mx-auto px-4 md:px-20 py-8 md:py-10">
       {/* Top Section: Banners */}
@@ -17,18 +14,13 @@ const Home = ({ searchTerm }) => {
       {/* Category Roundels (Hidden on mobile as per user request) */}
       <div className="hidden md:block">
         {searchTerm === '' && (
-          <CategoryRoundels selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+          <CategoryRoundels />
         )}
       </div>
 
-      {/* Sticky Horizontal Category Bar */}
-      {searchTerm === '' && (
-        <StickyCategoryBar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
-      )}
-
       {/* Dynamic Product Grid */}
       <div id="product-grid-section">
-        <ProductGrid selectedCategory={selectedCategory} searchTerm={searchTerm} />
+        <ProductGrid searchTerm={searchTerm} />
       </div>
       
       {/* Spacer for scrolling */}

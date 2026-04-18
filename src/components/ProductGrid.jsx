@@ -79,7 +79,7 @@ const hardcodedItems = [
   }
 ];
 
-const ProductGrid = ({ selectedCategory, searchTerm, isCategoryRoute }) => {
+const ProductGrid = ({ searchTerm, isCategoryRoute, categoryName }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -137,12 +137,12 @@ const ProductGrid = ({ selectedCategory, searchTerm, isCategoryRoute }) => {
 
   let filteredProducts = products;
   
-  if (searchTerm.trim() !== '') {
+  if (searchTerm && searchTerm.trim() !== '') {
     filteredProducts = products.filter(p => 
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  } else if (isCategoryRoute && selectedCategory !== 'All' && selectedCategory !== 'groceries') {
-    filteredProducts = products.filter(p => p.category === selectedCategory);
+  } else if (isCategoryRoute && categoryName && categoryName !== 'All' && categoryName !== 'groceries') {
+    filteredProducts = products.filter(p => p.category === categoryName);
   }
 
   if (isLoading) {
@@ -213,20 +213,18 @@ const ProductGrid = ({ selectedCategory, searchTerm, isCategoryRoute }) => {
   })).filter(group => group.items.length > 0);
 
   return (
-    <div className="w-full space-y-10 md:space-y-12">
+    <div className="w-full space-y-6 md:space-y-8">
       {productsByCategory.map((group) => (
-        <div key={group.category} id={group.category} className="w-full pt-2">
-          <div className="flex items-center justify-between mb-4">
+        <div key={group.category} id={group.category} className="w-full bg-white border border-gray-200 rounded-xl shadow-sm p-4 md:p-6">
+          <div className="flex items-center justify-between mb-4 md:mb-6">
             <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight">{group.category}</h2>
             <span className="text-[var(--color-blinkit-green)] font-bold text-sm cursor-pointer hover:text-green-700 transition-colors">see all</span>
           </div>
           
-          {/* Horizontal Slider */}
-          <div className="flex overflow-x-auto space-x-3 md:space-x-4 pb-4 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0 touch-pan-x snap-x snap-mandatory">
+          {/* Grid of Product Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
             {group.items.map((product) => (
-              <div key={product.id} className="w-[42vw] md:w-48 lg:w-52 flex-shrink-0 snap-start">
-                <ProductCard product={product} />
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
