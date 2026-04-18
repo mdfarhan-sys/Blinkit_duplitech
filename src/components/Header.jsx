@@ -10,7 +10,7 @@ const searchSuggestions = ['Search "milk"', 'Search "atta"', 'Search "bread"', '
 
 const Header = ({ searchTerm, setSearchTerm }) => {
   const { setIsCartOpen, totalItems, grandTotal } = useCart();
-  const { locationName, setLocationName, city, setCity, deliveryTime, setDeliveryTime } = useLocation();
+  const { locationName, setLocationName, setCity, deliveryTime, setDeliveryTime } = useLocation();
   const { isLoggedIn, setIsLoginModalOpen } = useAuth();
   
   const [isLocationMenuOpen, setIsLocationMenuOpen] = useState(false);

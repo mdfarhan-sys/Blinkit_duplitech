@@ -27,7 +27,8 @@ const PromoBanners = () => {
         >
           <img 
             src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=720/layout-engine/2023-07/pharmacy-WEB.jpg" 
-            alt="Pharmacy" 
+            alt="Pharmacy"
+            loading="lazy" 
             className="w-full h-auto object-cover block"
           />
         </Link>
@@ -39,7 +40,8 @@ const PromoBanners = () => {
         >
           <img 
             src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=720/layout-engine/2026-01/pet_crystal_WEB-1.png" 
-            alt="Pet Care" 
+            alt="Pet Care"
+            loading="lazy" 
             className="w-full h-auto object-cover block"
           />
         </Link>
@@ -51,7 +53,8 @@ const PromoBanners = () => {
         >
           <img 
             src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=720/layout-engine/2026-01/baby_crystal_WEB-1.png" 
-            alt="Baby Care" 
+            alt="Baby Care"
+            loading="lazy" 
             className="w-full h-auto object-cover block"
           />
         </Link>
