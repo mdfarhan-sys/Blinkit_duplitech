@@ -151,7 +151,7 @@ const ProductGrid = ({ selectedCategory, searchTerm, isCategoryRoute }) => {
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight">Loading...</h2>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
           {[...Array(10)].map((_, i) => (
             <div key={i} className="bg-white border border-gray-100 rounded-xl p-3 flex flex-col h-[280px] animate-pulse shadow-sm">
               <div className="w-full h-32 bg-gray-200 rounded-lg mb-3"></div>
@@ -197,7 +197,7 @@ const ProductGrid = ({ selectedCategory, searchTerm, isCategoryRoute }) => {
             </span>
           </div>
         )}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -222,9 +222,9 @@ const ProductGrid = ({ selectedCategory, searchTerm, isCategoryRoute }) => {
           </div>
           
           {/* Horizontal Slider */}
-          <div className="flex overflow-x-auto space-x-3 md:space-x-4 pb-4 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex overflow-x-auto space-x-3 md:space-x-4 pb-4 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0 touch-pan-x snap-x snap-mandatory">
             {group.items.map((product) => (
-              <div key={product.id} className="w-36 sm:w-44 md:w-48 lg:w-52 flex-shrink-0">
+              <div key={product.id} className="w-[42vw] md:w-48 lg:w-52 flex-shrink-0 snap-start">
                 <ProductCard product={product} />
               </div>
             ))}

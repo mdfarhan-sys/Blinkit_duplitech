@@ -15,7 +15,7 @@ const CategoryPage = ({ searchTerm }) => {
   const title = categoryTitleMap[categoryId] || 'Category';
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+    <main className="max-w-7xl mx-auto px-4 md:px-20 py-8 md:py-10">
       <div className="mb-6 flex items-center space-x-3">
         <Link to="/" className="text-sm font-bold text-gray-500 hover:text-[var(--color-blinkit-green)] transition-colors">
           Home

@@ -41,7 +41,7 @@ const Header = ({ searchTerm, setSearchTerm }) => {
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-20">
         
         {/* Desktop Layout (md and up) */}
         <div className="hidden md:flex items-center justify-between py-3 space-x-8">
@@ -142,22 +142,27 @@ const Header = ({ searchTerm, setSearchTerm }) => {
         {/* Mobile Layout (below md) */}
         <div className="md:hidden py-3 flex flex-col space-y-4">
           
-          {/* Top Row: Location and Profile/Login */}
+          {/* Top Row: Logo, Location and Login */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="bg-[var(--color-blinkit-yellow)] p-1.5 rounded-full">
-                <MapPin className="w-5 h-5 text-gray-900" />
-              </div>
+            <div className="flex items-center space-x-3">
+              {/* Logo */}
+              <Link to="/" className="flex-shrink-0 cursor-pointer">
+                <span className="text-2xl font-black tracking-tighter text-gray-900">
+                  blinkit<span className="text-[var(--color-blinkit-yellow)]">.</span>
+                </span>
+              </Link>
+              <div className="h-6 w-px bg-gray-200"></div>
+              {/* Location */}
               <div className="relative">
                 <div 
                   onClick={() => setIsLocationMenuOpen(!isLocationMenuOpen)}
                   className="flex flex-col cursor-pointer"
                 >
-                  <div className="font-extrabold text-sm text-gray-900 leading-tight">
-                    Delivery in {deliveryTime} minutes
+                  <div className="font-extrabold text-[11px] text-gray-900 leading-tight">
+                    Delivery in {deliveryTime} min
                   </div>
-                  <div className="flex items-center text-sm text-gray-600 leading-tight truncate max-w-[150px]">
-                    {locationName} <ChevronDown className={`w-4 h-4 ml-0.5 flex-shrink-0 transition-transform ${isLocationMenuOpen ? 'rotate-180' : ''}`} />
+                  <div className="flex items-center text-[10px] text-gray-600 leading-tight truncate max-w-[100px]">
+                    {locationName} <ChevronDown className={`w-3 h-3 ml-0.5 flex-shrink-0 transition-transform ${isLocationMenuOpen ? 'rotate-180' : ''}`} />
                   </div>
                 </div>
 
